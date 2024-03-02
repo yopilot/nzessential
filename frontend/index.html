@@ -1,0 +1,229 @@
+<html>
+  <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  </head>
+  <body class="bg-white p-8">
+    <div class="max-w-2xl mx-auto">
+      <div class="border-2 border-black p-4 responsive-border">
+        <h2 class="text-3xl font-bold mb-4">NZ Essentials</h2>
+        <br />
+
+        <div class="grid grid-cols-2 gap-4 mb-4 responsive-grid">
+          <div class="font-bold">Name of Authorised Person</div>
+          <input
+            type="text"
+            id="authorisedPerson"
+            placeholder="Name"
+            class="border-2 border-gray-300 p-2"
+          />
+
+          <div class="font-bold">Job Title</div>
+          <input
+            type="text"
+            id="jobTitle"
+            placeholder="Job Title"
+            class="border-2 border-gray-300 p-2"
+          />
+
+          <div class="font-bold">Registered Name of the Entity</div>
+          <input
+            type="text"
+            id="registeredName"
+            placeholder="Registered Name"
+            class="border-2 border-gray-300 p-2"
+          />
+
+          <div class="font-bold">Trading Name (if any)</div>
+          <input
+            type="text"
+            id="tradingName"
+            placeholder="Trading Name"
+            class="border-2 border-gray-300 p-2"
+          />
+
+          <div class="font-bold">Name of the Main Contact (if different)</div>
+          <input
+            type="text"
+            id="mainContactName"
+            placeholder="Main Contact Name"
+            class="border-2 border-gray-300 p-2"
+          />
+
+          <div class="font-bold">Main Contact Phone Number</div>
+          <input
+            type="tel"
+            id="mainContactPhone"
+            placeholder="Phone Number"
+            class="border-2 border-gray-300 p-2"
+          />
+
+          <div class="font-bold">Main Contact Email Address</div>
+          <input
+            type="email"
+            id="mainContactEmail"
+            placeholder="Email Address"
+            class="border-2 border-gray-300 p-2"
+          />
+
+          <div class="font-bold">Interested in Solar?</div>
+          <select id="interestedInSolar" class="border-2 border-gray-300 p-2">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+
+          <div class="font-bold">Industry Type</div>
+          <input
+            type="text"
+            id="industryType"
+            placeholder="Industry Type"
+            class="border-2 border-gray-300 p-2"
+          />
+
+          <div class="font-bold">Is Main Contact Ultimate Decision Maker?</div>
+          <select id="isDecisionMaker" class="border-2 border-gray-300 p-2">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-1 items-center mb-4">
+          <div class="font-bold">Signed by the Duly Authorised Person:</div>
+          <div id="signaturePadHolder" class="responsive-signature"></div>
+          <button
+            onclick="clearSignature()"
+            class="mt-2 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded"
+          >
+            Clear Signature
+          </button>
+        </div>
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div class="font-bold">Date:</div>
+          <input
+            type="date"
+            id="signedDate"
+            class="border-2 border-gray-300 p-2"
+          />
+        </div>
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div class="font-bold">Date of Birth of Signatory:</div>
+          <input
+            type="date"
+            id="dobSignatory"
+            class="border-2 border-gray-300 p-2"
+          />
+        </div>
+        <div class="border-t-2 border-black pt-4">
+          <div class="font-bold mb-2">Supply Address:</div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1">
+              <div class="font-bold">ICP 1:</div>
+              <input
+                type="text"
+                id="icp1"
+                placeholder="ICP 1 Detail"
+                class="border-2 border-gray-300 p-2"
+              />
+            </div>
+            <div class="grid grid-cols-1">
+              <div class="font-bold">Gas ICP 1:</div>
+              <input
+                type="text"
+                id="gasIcp1"
+                placeholder="Gas ICP 1 Detail"
+                class="border-2 border-gray-300 p-2"
+              />
+            </div>
+            <div class="grid grid-cols-1">
+              <div class="font-bold">ICP 2:</div>
+              <input
+                type="text"
+                id="icp2"
+                placeholder="ICP 2 Detail"
+                class="border-2 border-gray-300 p-2"
+              />
+            </div>
+            <div class="grid grid-cols-1">
+              <div class="font-bold">Gas ICP 2:</div>
+              <input
+                type="text"
+                id="gasIcp2"
+                placeholder="Gas ICP 2 Detail"
+                class="border-2 border-gray-300 p-2"
+              />
+            </div>
+            <div class="grid grid-cols-1">
+              <div class="font-bold">ICP 3:</div>
+              <input
+                type="text"
+                id="icp3"
+                placeholder="ICP 3 Detail"
+                class="border-2 border-gray-300 p-2"
+              />
+            </div>
+            <div class="grid grid-cols-1">
+              <div class="font-bold">Gas ICP 3:</div>
+              <input
+                type="text"
+                id="gasIcp3"
+                placeholder="Gas ICP 3 Detail"
+                class="border-2 border-gray-300 p-2"
+              />
+            </div>
+            <div class="grid grid-cols-1">
+              <div class="font-bold">ICP 4:</div>
+              <input
+                type="text"
+                id="icp4"
+                placeholder="ICP 4 Detail"
+                class="border-2 border-gray-300 p-2"
+              />
+            </div>
+            <div class="grid grid-cols-1">
+              <div class="font-bold">Gas ICP 4:</div>
+              <input
+                type="text"
+                id="gasIcp4"
+                placeholder="Gas ICP 4 Detail"
+                class="border-2 border-gray-300 p-2"
+              />
+            </div>
+            <div class="grid grid-cols-1">
+              <div class="font-bold">ICP 5:</div>
+              <input
+                type="text"
+                id="icp5"
+                placeholder="ICP 5 Detail"
+                class="border-2 border-gray-300 p-2"
+              />
+            </div>
+            <div class="grid grid-cols-1">
+              <div class="font-bold">Gas ICP 5:</div>
+              <input
+                type="text"
+                id="gasIcp5"
+                placeholder="Gas ICP 5 Detail"
+                class="border-2 border-gray-300 p-2"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button
+            id="submitData"
+            class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Submit Data
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="sketch.js"></script>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>

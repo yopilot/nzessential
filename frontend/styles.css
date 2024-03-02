@@ -1,0 +1,23 @@
+body {
+  font-family: "Open Sans", sans-serif;
+}
+@media (max-width: 550px) {
+  .responsive-border {
+    border: none !important;
+    padding: 0 !important;
+  }
+  .responsive-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .responsive-signature {
+    justify-content: center;
+  }
+  .submit-button-container {
+    justify-content: center;
+  }
+}
+
+#signature-pad {
+  border: 1px solid black;
+  cursor: crosshair;
+}
