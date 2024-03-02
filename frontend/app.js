@@ -10,25 +10,18 @@ import {
   getDownloadURL,
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
+
+
+
+
+
+
 // Show the data submitted
 document
   .getElementById("submitData")
   .addEventListener("click", async function () {
-    const canvasDataUrl = window.exportSignature(); // Get canvas content as a data URL
-
-    // Convert data URL to Blob
-    const response = await fetch(canvasDataUrl);
-    const blob = await response.blob();
-
-    // Upload Blob to Firebase Storage
-    const storageRef = ref(
-      storage,
-      "signatures/" + new Date().getTime() + ".png"
-    );
-    await uploadBytes(storageRef, blob);
-
-    // Get download URL
-    const signatureImage = await getDownloadURL(storageRef);
+    
+    
 
     const data = {
       authorisedPerson: document.getElementById("authorisedPerson").value,
@@ -53,8 +46,53 @@ document
       gasIcp4: document.getElementById("gasIcp4").value,
       icp5: document.getElementById("icp5").value,
       gasIcp5: document.getElementById("gasIcp5").value,
-      signatureImage: signatureImage,
+      // signatureImage: signatureImage,
     };
+    function showFillAllFieldsMessage() {
+      document.getElementById('fillAllFieldsMessage').classList.remove('hidden');
+  }
+
+  // Function to hide the "Fill all required fields" message
+  function hideFillAllFieldsMessage() {
+      document.getElementById('fillAllFieldsMessage').classList.add('hidden');
+  }
+    
+    function validateForm() {
+      if(data["authorisedPerson"] == "" || data["jobTitle"] == "" || data["registeredName"] == "" || data["mainContactPhone"] == "" || data["mainContactEmail"] == "" || data["interestedInSolar"] == "" || data["industryType"] == "" || data["isDecisionMaker"] == "" || data["signedDate"] == "" || data["dobSignatory"] == "" || data["icp1"] == "" ) {
+        return false;
+      }
+      else{
+        return true;
+      
+      }
+    }
+
+    if (validateForm() == false) {
+      debugger;
+      showFillAllFieldsMessage();
+      // Hide the message after 5 seconds
+      setTimeout(hideFillAllFieldsMessage, 150000);
+      //scroll to top
+      window.scrollTo(0, 0);
+      return;
+    }
+    const canvasDataUrl = window.exportSignature(); // Get canvas content as a data URL
+
+    // Convert data URL to Blob
+    const response = await fetch(canvasDataUrl);
+    const blob = await response.blob();
+
+    // Upload Blob to Firebase Storage
+    const storageRef = ref(
+      storage,
+      "signatures/" + new Date().getTime() + ".png"
+    );
+    await uploadBytes(storageRef, blob);
+
+    // Get download URL
+    const signatureImage = await getDownloadURL(storageRef);
+    data["signatureImage"] = signatureImage;
+    
     // Function to store data in Firestore
     async function storeData(data) {
       try {
@@ -64,8 +102,8 @@ document
         console.error("Error storing data: ", error);
       }
     }
-
     storeData(data);
+    
 
     console.log(JSON.stringify(data));
   });
