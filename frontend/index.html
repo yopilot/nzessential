@@ -1,5 +1,5 @@
 <html>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <head>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -10,34 +10,41 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
   </head>
   <body class="bg-white p-8">
+    
     <div class="max-w-2xl mx-auto">
       <div class="border-2 border-black p-4 responsive-border">
         <h2 class="text-3xl font-bold mb-4">NZ Essentials</h2>
         <br />
+        <div id="fillAllFieldsMessage" class="bg-red-500 text-white p-4 mb-4 hidden">
+          Please fill all required fields.
+      </div>
 
         <div class="grid grid-cols-2 gap-4 mb-4 responsive-grid">
-          <div class="font-bold">Name of Authorised Person</div>
+          <div class="font-bold">Name of Authorised Person <span style="color: red;">*</span></div>
           <input
             type="text"
             id="authorisedPerson"
             placeholder="Name"
             class="border-2 border-gray-300 p-2"
+            required
           />
 
-          <div class="font-bold">Job Title</div>
+          <div class="font-bold">Job Title<span style="color: red;">*</span></div>
           <input
             type="text"
             id="jobTitle"
             placeholder="Job Title"
             class="border-2 border-gray-300 p-2"
+            required
           />
 
-          <div class="font-bold">Registered Name of the Entity</div>
+          <div class="font-bold">Registered Name of the Entity<span style="color: red;">*</span></div>
           <input
             type="text"
             id="registeredName"
             placeholder="Registered Name"
             class="border-2 border-gray-300 p-2"
+            required
           />
 
           <div class="font-bold">Trading Name (if any)</div>
@@ -46,6 +53,7 @@
             id="tradingName"
             placeholder="Trading Name"
             class="border-2 border-gray-300 p-2"
+          
           />
 
           <div class="font-bold">Name of the Main Contact (if different)</div>
@@ -56,44 +64,47 @@
             class="border-2 border-gray-300 p-2"
           />
 
-          <div class="font-bold">Main Contact Phone Number</div>
+          <div class="font-bold">Main Contact Phone Number<span style="color: red;">*</span></div>
           <input
             type="tel"
             id="mainContactPhone"
             placeholder="Phone Number"
             class="border-2 border-gray-300 p-2"
+            required
           />
 
-          <div class="font-bold">Main Contact Email Address</div>
+          <div class="font-bold">Main Contact Email Address<span style="color: red;">*</span></div>
           <input
             type="email"
             id="mainContactEmail"
             placeholder="Email Address"
             class="border-2 border-gray-300 p-2"
+            required
           />
 
-          <div class="font-bold">Interested in Solar?</div>
-          <select id="interestedInSolar" class="border-2 border-gray-300 p-2">
+          <div class="font-bold">Interested in Solar?<span style="color: red;">*</span></div>
+          <select id="interestedInSolar" class="border-2 border-gray-300 p-2" required>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
 
-          <div class="font-bold">Industry Type</div>
+          <div class="font-bold">Industry Type<span style="color: red;">*</span></div>
           <input
             type="text"
             id="industryType"
             placeholder="Industry Type"
             class="border-2 border-gray-300 p-2"
+            required
           />
 
-          <div class="font-bold">Is Main Contact Ultimate Decision Maker?</div>
-          <select id="isDecisionMaker" class="border-2 border-gray-300 p-2">
+          <div class="font-bold">Is Main Contact Ultimate Decision Maker?<span style="color: red;">*</span></div>
+          <select id="isDecisionMaker" class="border-2 border-gray-300 p-2" required>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
         </div>
         <div class="grid grid-cols-1 items-center mb-4">
-          <div class="font-bold">Signed by the Duly Authorised Person:</div>
+          <div class="font-bold">Signed by the Duly Authorised Person:<span style="color: red;">*</span></div>
           <div id="signaturePadHolder" class="responsive-signature"></div>
           <button
             onclick="clearSignature()"
@@ -103,31 +114,34 @@
           </button>
         </div>
         <div class="grid grid-cols-2 gap-4 mb-4">
-          <div class="font-bold">Date:</div>
+          <div class="font-bold">Date:<span style="color: red;">*</span></div>
           <input
             type="date"
             id="signedDate"
             class="border-2 border-gray-300 p-2"
+            required
           />
         </div>
         <div class="grid grid-cols-2 gap-4 mb-4">
-          <div class="font-bold">Date of Birth of Signatory:</div>
+          <div class="font-bold">Date of Birth of Signatory:<span style="color: red;">*</span></div>
           <input
             type="date"
             id="dobSignatory"
             class="border-2 border-gray-300 p-2"
+            required
           />
         </div>
         <div class="border-t-2 border-black pt-4">
           <div class="font-bold mb-2">Supply Address:</div>
           <div class="grid grid-cols-2 gap-4">
             <div class="grid grid-cols-1">
-              <div class="font-bold">ICP 1:</div>
+              <div class="font-bold">ICP 1:<span style="color: red;">*</span></div>
               <input
                 type="text"
                 id="icp1"
                 placeholder="ICP 1 Detail"
                 class="border-2 border-gray-300 p-2"
+                required
               />
             </div>
             <div class="grid grid-cols-1">
@@ -227,4 +241,18 @@
 
     <script src="app.js" type="module"></script>
   </body>
+  <script>
+  window.onload = function() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById('signedDate').value = today;
+  };
+
+  
+</script>
+
 </html>
