@@ -76,6 +76,9 @@ document
       window.scrollTo(0, 0);
       return;
     }
+    // change submit button text to submitting and clour to dark blue
+    document.getElementById("submitData").innerText = "Submitting...";
+    document.getElementById("submitData").style.backgroundColor = "#0d6efd";
     const canvasDataUrl = window.exportSignature(); // Get canvas content as a data URL
 
     // Convert data URL to Blob
@@ -96,14 +99,18 @@ document
     // Function to store data in Firestore
     async function storeData(data) {
       try {
+
         const docRef = await addDoc(collection(db, "user_data"), data);
         console.log("Data stored successfully with ID: ", docRef.id);
+
       } catch (error) {
         console.error("Error storing data: ", error);
       }
     }
-    storeData(data);
     
+    storeData(data);
+    window.location.href = "thnx.html";
+
 
     console.log(JSON.stringify(data));
   });
