@@ -14,6 +14,13 @@ function setup() {
 
   // Ensure the canvas resizes dynamically with the window
   windowResized(); // Call once to ensure initial adjustment
+
+  // Add this line to prevent scrolling when touching within the canvas
+  document.getElementById('signature-pad').addEventListener('touchmove', function(e) {
+    if (e.target == this) {
+      e.preventDefault();
+    }
+  }, { passive: false });
 }
 
 function windowResized() {
