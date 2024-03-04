@@ -21,3 +21,7 @@ body {
   border: 1px solid black;
   cursor: crosshair;
 }
+.font-bold {
+  margin-top: 5px; /* Adjust as needed */
+  margin-left: 3px;;
+}
