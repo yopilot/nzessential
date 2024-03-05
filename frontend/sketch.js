@@ -1,8 +1,9 @@
 let signaturePad;
 let drawing = false;
+let signatureContent = null; // Variable to store the signature content
 
 function setup() {
-  let canvasWidth = windowWidth > 460 ? 400 : windowWidth - 70;
+  let canvasWidth = windowWidth > 460 ? 400 : windowWidth - 60;
   let canvasHeight = 200; // Fixed height
 
   // Create the signature canvas and attach it to the signaturePadHolder div
@@ -23,17 +24,23 @@ function setup() {
 }
 
 function windowResized() {
-  let canvasWidth = windowWidth > 460 ? 400 : windowWidth - 70;
+  let canvasWidth = windowWidth > 460 ? 400 : windowWidth - 60;
   let canvasHeight = 200; // Fixed height
-
-  // Store the current signature content
-  let signatureContent = getSignatureContent();
+  
+  // Store the current signature content if it exists
+  if (signatureContent === null) {
+    signatureContent = signaturePad.canvas.toDataURL("image/png");
+  }
 
   // Resize the canvas
   resizeCanvas(canvasWidth, canvasHeight);
 
-  // Restore the signature content
-  restoreSignatureContent(signatureContent);
+  // Redraw the signature content if it exists
+  if (signatureContent !== null) {
+    let img = loadImage(signatureContent, function() {
+      image(img, 0, 0); // Draw the signature content back onto the canvas
+    });
+  }
 }
 
 function draw() {
@@ -59,19 +66,6 @@ function clearSignature() {
 function exportSignature() {
   let signatureDataURL = signaturePad.canvas.toDataURL("image/png");
   return signatureDataURL;
-}
-
-// Function to get the signature content as an image
-function getSignatureContent() {
-  let signatureContent = signaturePad.canvas.toDataURL("image/png");
-  return signatureContent;
-}
-
-// Function to restore the signature content after resizing
-function restoreSignatureContent(signatureContent) {
-  let img = loadImage(signatureContent, function() {
-    image(img, 0, 0); // Draw the signature content back onto the canvas
-  });
 }
 
 window.exportSignature = exportSignature;
