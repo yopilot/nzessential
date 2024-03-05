@@ -48,11 +48,8 @@ function clearSignature() {
   let signatureCanvas = document.getElementById("signature-pad");
   let rect = signatureCanvas.getBoundingClientRect();
 
-  // Check if the canvas is visible within the viewport
-  if (
-    rect.top >= 0 &&
-    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-  ) {
+  // Check if the canvas is currently visible within the viewport
+  if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
     background(255);
   }
 }
