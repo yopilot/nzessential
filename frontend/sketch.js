@@ -2,7 +2,7 @@ let signaturePad;
 let drawing = false;
 
 function setup() {
-  let canvasWidth = 300; // Fixed width
+  let canvasWidth = windowWidth > 460 ? 400 : windowWidth - 60;
   let canvasHeight = 200; // Fixed height
 
   // Create the signature canvas and attach it to the signaturePadHolder div
@@ -22,7 +22,19 @@ function setup() {
   }, { passive: false });
 }
 
-// Remove the windowResized() function entirely
+function windowResized() {
+  let canvasWidth = windowWidth > 460 ? 400 : windowWidth - 60;
+  let canvasHeight = 200; // Fixed height
+
+  // Store the current signature content
+  let signatureContent = getSignatureContent();
+
+  // Resize the canvas
+  resizeCanvas(canvasWidth, canvasHeight);
+
+  // Restore the signature content
+  restoreSignatureContent(signatureContent);
+}
 
 function draw() {
   stroke(0); // Set stroke color to black
@@ -47,6 +59,19 @@ function clearSignature() {
 function exportSignature() {
   let signatureDataURL = signaturePad.canvas.toDataURL("image/png");
   return signatureDataURL;
+}
+
+// Function to get the signature content as an image
+function getSignatureContent() {
+  let signatureContent = signaturePad.canvas.toDataURL("image/png");
+  return signatureContent;
+}
+
+// Function to restore the signature content after resizing
+function restoreSignatureContent(signatureContent) {
+  let img = loadImage(signatureContent, function() {
+    image(img, 0, 0); // Draw the signature content back onto the canvas
+  });
 }
 
 window.exportSignature = exportSignature;
