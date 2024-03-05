@@ -1,19 +1,19 @@
 let signaturePad;
 let drawing = false;
-let signatureContent = null; // Variable to store the signature content
 
 function setup() {
-  let canvasWidth = windowWidth > 460 ? 400 : 500;
+  let canvasWidth = windowWidth > 460 ? 400 : windowWidth - 60;
   let canvasHeight = 200; // Fixed height
 
-  // Create the signature canvas and attach it to the signaturePadHolder div
-  signaturePad = createCanvas(canvasWidth, canvasHeight);
-  signaturePad.parent("signaturePadHolder");
+  signaturePad = createCanvas(canvasWidth, canvasHeight).parent(
+    "signaturePadHolder"
+  );
   signaturePad.id("signature-pad");
-
-  // Set initial properties for the signature
   background(255); // Starting with a white background
   strokeWeight(2); // Setting the stroke weight for the signature
+
+  // Ensure the canvas resizes dynamically with the window
+  windowResized(); // Call once to ensure initial adjustment
 
   // Add this line to prevent scrolling when touching within the canvas
   document.getElementById('signature-pad').addEventListener('touchmove', function(e) {
@@ -24,23 +24,8 @@ function setup() {
 }
 
 function windowResized() {
-  let canvasWidth = windowWidth > 460 ? 400 : 500;
-  let canvasHeight = 200; // Fixed height
-  
-  // Store the current signature content if it exists
-  if (signatureContent === null) {
-    signatureContent = signaturePad.canvas.toDataURL("image/png");
-  }
-
-  // Resize the canvas
-  resizeCanvas(canvasWidth, canvasHeight);
-
-  // Redraw the signature content if it exists
-  if (signatureContent !== null) {
-    let img = loadImage(signatureContent, function() {
-      image(img, 0, 0); // Draw the signature content back onto the canvas
-    });
-  }
+  let canvasWidth = windowWidth > 460 ? 400 : windowWidth - 60;
+  resizeCanvas(canvasWidth, 200); // Resizing canvas when window is resized
 }
 
 function draw() {
