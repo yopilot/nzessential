@@ -3,7 +3,7 @@ let drawing = false;
 let signatureContent = null; // Variable to store the signature content
 
 function setup() {
-  let canvasWidth = windowWidth > 460 ? 400 : windowWidth - 60;
+  let canvasWidth = windowWidth > 460 ? 400 : 500;
   let canvasHeight = 200; // Fixed height
 
   // Create the signature canvas and attach it to the signaturePadHolder div
@@ -24,7 +24,7 @@ function setup() {
 }
 
 function windowResized() {
-  let canvasWidth = windowWidth > 460 ? 400 : windowWidth - 60;
+  let canvasWidth = windowWidth > 460 ? 400 : 500;
   let canvasHeight = 200; // Fixed height
   
   // Store the current signature content if it exists
