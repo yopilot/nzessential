@@ -21,6 +21,8 @@ function setup() {
       e.preventDefault();
     }
   }, { passive: false });
+
+  noLoop(); // Stop the draw function from looping when not drawing
 }
 
 function windowResized() {
@@ -28,14 +30,20 @@ function windowResized() {
   resizeCanvas(canvasWidth, 200); // Resizing canvas when window is resized
 }
 
+function mousePressed() {
+  loop(); // Start the draw loop when the mouse is pressed
+}
+
+function mouseReleased() {
+  noLoop(); // Stop the draw loop when the mouse is released
+}
+
 function draw() {
   stroke(0); // Set stroke color to black
-  if (mouseIsPressed) {
-    if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-      // Check if the mouse is within the canvas bounds
-      drawing = true;
-      line(pmouseX, pmouseY, mouseX, mouseY); // Draw lines following the mouse
-    }
+  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+    // Check if the mouse is within the canvas bounds
+    drawing = true;
+    line(pmouseX, pmouseY, mouseX, mouseY); // Draw lines following the mouse
   } else {
     if (drawing) {
       drawing = false;
@@ -45,14 +53,9 @@ function draw() {
 
 // Function to clear the signature pad
 function clearSignature() {
-  let signatureCanvas = document.getElementById("signature-pad");
-  let rect = signatureCanvas.getBoundingClientRect();
-
-  // Check if the canvas is currently visible within the viewport
-  if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-    background(255);
-  }
+  background(255); // Clear canvas by repainting it with a white background
 }
+
 function exportSignature() {
   let signatureDataURL = signaturePad.canvas.toDataURL("image/png");
   return signatureDataURL;
