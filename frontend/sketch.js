@@ -45,9 +45,17 @@ function draw() {
 
 // Function to clear the signature pad
 function clearSignature() {
-  background(255); // Clear canvas by repainting it with a white background
-}
+  let signatureCanvas = document.getElementById("signature-pad");
+  let rect = signatureCanvas.getBoundingClientRect();
 
+  // Check if the canvas is visible within the viewport
+  if (
+    rect.top >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+  ) {
+    background(255);
+  }
+}
 function exportSignature() {
   let signatureDataURL = signaturePad.canvas.toDataURL("image/png");
   return signatureDataURL;
