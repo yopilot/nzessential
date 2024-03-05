@@ -24,7 +24,8 @@ function setup() {
 }
 
 function windowResized() {
-  resizeCanvas(canvasWidth, 200); // Resizing canvas when window is resized
+  let canvasWidth = windowWidth > 460 ? 400 : windowWidth - 60;
+
 }
 
 function draw() {
