@@ -5,9 +5,7 @@ function setup() {
   let canvasWidth = windowWidth > 460 ? 400 : windowWidth - 60;
   let canvasHeight = 200; // Fixed height
 
-  signaturePad = createCanvas(canvasWidth, canvasHeight).parent(
-    "signaturePadHolder"
-  );
+  signaturePad = createCanvas(canvasWidth, canvasHeight).parent("signaturePadHolder");
   signaturePad.id("signature-pad");
   background(255); // Starting with a white background
   strokeWeight(2); // Setting the stroke weight for the signature
@@ -30,11 +28,11 @@ function windowResized() {
 
 function draw() {
   stroke(0); // Set stroke color to black
-  if (mouseIsPressed) {
+  if (mouseIsPressed || touchIsDown) {
     if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-      // Check if the mouse is within the canvas bounds
+      // Check if the mouse/touch is within the canvas bounds
       drawing = true;
-      line(pmouseX, pmouseY, mouseX, mouseY); // Draw lines following the mouse
+      line(pmouseX, pmouseY, mouseX, mouseY); // Draw lines following the mouse/touch
     }
   } else {
     if (drawing) {
