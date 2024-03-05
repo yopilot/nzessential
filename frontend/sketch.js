@@ -17,12 +17,10 @@ function setup() {
 
   // Add this line to prevent scrolling when touching within the canvas
   document.getElementById('signature-pad').addEventListener('touchmove', function(e) {
-    if (drawing) {
+    if (e.target == this) {
       e.preventDefault();
     }
   }, { passive: false });
-
-  noLoop(); // Stop the draw function from looping when not drawing
 }
 
 function windowResized() {
@@ -30,21 +28,14 @@ function windowResized() {
   resizeCanvas(canvasWidth, 200); // Resizing canvas when window is resized
 }
 
-function mousePressed() {
-  drawing = true;
-  loop(); // Start the draw loop when the mouse is pressed
-}
-
-function mouseReleased() {
-  drawing = false;
-  noLoop(); // Stop the draw loop when the mouse is released
-}
-
 function draw() {
   stroke(0); // Set stroke color to black
-  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-    // Check if the mouse is within the canvas bounds
-    line(pmouseX, pmouseY, mouseX, mouseY); // Draw lines following the mouse
+  if (mouseIsPressed) {
+    if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+      // Check if the mouse is within the canvas bounds
+      drawing = true;
+      line(pmouseX, pmouseY, mouseX, mouseY); // Draw lines following the mouse
+    }
   } else {
     if (drawing) {
       drawing = false;
