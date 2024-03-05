@@ -2,7 +2,7 @@ let signaturePad;
 let drawing = false;
 
 function setup() {
-  let canvasWidth = windowWidth > 460 ? 400 : windowWidth - 60;
+  let canvasWidth = 300; // Fixed width
   let canvasHeight = 200; // Fixed height
 
   // Create the signature canvas and attach it to the signaturePadHolder div
@@ -14,9 +14,6 @@ function setup() {
   background(255); // Starting with a white background
   strokeWeight(2); // Setting the stroke weight for the signature
 
-  // Ensure the canvas resizes dynamically with the window
-  windowResized(); // Call once to ensure initial adjustment
-
   // Add this line to prevent scrolling when touching within the canvas
   document.getElementById('signature-pad').addEventListener('touchmove', function(e) {
     if (e.target == this) {
@@ -25,10 +22,7 @@ function setup() {
   }, { passive: false });
 }
 
-function windowResized() {
-  let canvasWidth = windowWidth > 460 ? 400 : windowWidth - 60;
-  resizeCanvas(canvasWidth, 200); // Resizing canvas when window is resized
-}
+// Remove the windowResized() function entirely
 
 function draw() {
   stroke(0); // Set stroke color to black
