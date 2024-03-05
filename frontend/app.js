@@ -58,14 +58,17 @@ document
   }
     
     function validateForm() {
-      if(data["authorisedPerson"] == "" || data["jobTitle"] == "" || data["registeredName"] == "" || data["mainContactPhone"] == "" || data["mainContactEmail"] == "" || data["interestedInSolar"] == "" || data["industryType"] == "" || data["isDecisionMaker"] == "" || data["signedDate"] == "" || data["dobSignatory"] == "" || data["icp1"] == "" ) {
-        return false;
-      }
-      else{
-        return true;
-      
-      }
+  let fields = ["authorisedPerson", "jobTitle", "registeredName", "mainContactPhone", "mainContactEmail", "interestedInSolar", "industryType", "isDecisionMaker", "signedDate", "dobSignatory", "icp1"];
+  
+  for(let i = 0; i < fields.length; i++) {
+    if(data[fields[i]] == "") {
+      document.getElementById(fields[i]).scrollIntoView();
+      return false;
     }
+  }
+  return true;
+}
+
 
     if (validateForm() == false) {
       debugger;
