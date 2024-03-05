@@ -5,10 +5,12 @@ function setup() {
   let canvasWidth = windowWidth > 460 ? 400 : windowWidth - 60;
   let canvasHeight = 200; // Fixed height
 
-  signaturePad = createCanvas(canvasWidth, canvasHeight).parent(
-    "signaturePadHolder"
-  );
+  // Create the signature canvas and attach it to the signaturePadHolder div
+  signaturePad = createCanvas(canvasWidth, canvasHeight);
+  signaturePad.parent("signaturePadHolder");
   signaturePad.id("signature-pad");
+
+  // Set initial properties for the signature
   background(255); // Starting with a white background
   strokeWeight(2); // Setting the stroke weight for the signature
 
