@@ -58,7 +58,7 @@ document
   }
     
     function validateForm() {
-  let fields = ["authorisedPerson", "jobTitle", "registeredName", "mainContactPhone", "mainContactEmail", "interestedInSolar", "industryType", "isDecisionMaker", "signedDate", "dobSignatory", "icp1"];
+  let fields = ["authorisedPerson", "jobTitle", "registeredName", "mainContactPhone", "mainContactEmail", "isDecisionMaker", "signedDate", "dobSignatory"];
   
   for(let i = 0; i < fields.length; i++) {
     if(data[fields[i]] == "") {
