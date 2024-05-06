@@ -111,7 +111,7 @@ document
       }
     }
     
-    storeData(data);
+    await storeData(data);
     window.location.href = "thnx.html";
 
 
